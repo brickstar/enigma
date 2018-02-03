@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'pry'
 require './lib/date'
 
 class DateTest < Minitest::Test
@@ -9,5 +10,9 @@ class DateTest < Minitest::Test
     assert_instance_of Date, date
   end
 
+  def test_double_the_date_function
+    date = Date.new 
 
+    assert_equal 7524, date.finding_date_offset
+  end
 end
