@@ -2,8 +2,9 @@ require 'pry'
 
 class Enigma
 
-  def initialize(message)
+  def initialize(message, key)
     @message = message
+    @key = key
 
   end
 
