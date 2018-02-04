@@ -43,7 +43,7 @@ class EnigmaTest < Minitest::Test
     date = Date.new
     today = date.find_today
     e = Enigma.new(my_message, key, today)
-    # binding.pry
+
     assert_equal [63, 72, 73, 14], e.find_key
   end
 
@@ -62,4 +62,22 @@ class EnigmaTest < Minitest::Test
     assert_equal "g", cipher["e"]
     assert_equal "e", cipher["c"]
  end
+
+ def test_encrypt_a_single_letter
+    key = "56710"
+    my_message = "t"
+    date = Date.new
+    today = date.find_today
+    e = Enigma.new(my_message, key, today)
+    cipher = e.cipher(63)
+
+    assert_equal "e", cipher["t"]
+    assert_equal "v", cipher["k"]
+    assert_equal "g", cipher["v"]
+    assert_equal "k", cipher["z"]
+    assert_equal "c", cipher["r"]
+ end
+
+ def test_encrypt_can_take_4_rotating_letters
+ end 
 end

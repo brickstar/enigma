@@ -13,10 +13,10 @@ class Enigma
 
   def encrypt(message)
     @message
-    #A turn to turn 73
-    #B turn it's number
-    #c turn it's number
-    #d turn it's number
+    #A turn to turn 63
+    #B turn it's 72
+    #c turn it's 73
+    #d turn it's 14
   end
 
   def cipher(rotation)
