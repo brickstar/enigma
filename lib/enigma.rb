@@ -2,24 +2,27 @@ require 'pry'
 
 class Enigma
   attr_reader :key_array,
-              :message
+              :message,
+              :array_1,
+              :array_2
 
   def initialize(message, key = "56710", date_today)
     @message    = message
     @key        = key
     @key_array  = []
     @date_today = date_today
+    @array_1 = nil
+    @array_2 = nil
 
   end
 
   def encrypt(message)
     @message
-    characters = message.chars
-    
-    first_letter = cipher(63)[characters[0]]
-    second_letter = cipher(72)[characters[1]]
-    third_letter = cipher(73)[characters[2]]
-    fourth_letter = cipher(14)[characters[3]]
+
+    first_letter = cipher(63)[message[0]]
+    second_letter = cipher(72)[message[1]]
+    third_letter = cipher(73)[message[2]]
+    fourth_letter = cipher(14)[message[3]]
 
     @message = first_letter + second_letter + third_letter + fourth_letter
     #A turn to turn 63
@@ -47,5 +50,11 @@ class Enigma
     @key_array << random_b + date_b
     @key_array << random_c + date_c
     @key_array << random_d + date_d
+  end
+
+  def split_message(my_message)
+    my_message_broken = my_message.chars
+    @array_1 = my_message_broken[0..3]
+    @array_2 = my_message_broken[4..7]
   end
 end
