@@ -13,6 +13,16 @@ class Enigma
 
   def encrypt(message)
     @message
+    #A turn to turn 73
+    #B turn it's number
+    #c turn it's number
+    #d turn it's number
+  end
+
+  def cipher(rotation)
+    characters = ('a'..'z').to_a
+    rotated_characters = characters.rotate(rotation)
+    Hash[characters.zip(rotated_characters)]
   end
 
   def find_key
