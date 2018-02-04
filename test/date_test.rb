@@ -13,6 +13,6 @@ class DateTest < Minitest::Test
   def test_double_the_date_function
     date = Date.new
 
-    assert_equal "7524", date.finding_date_offset
+    assert_equal "7524", date.find_today
   end
 end

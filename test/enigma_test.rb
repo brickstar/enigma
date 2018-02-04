@@ -11,7 +11,7 @@ class EnigmaTest < Minitest::Test
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    date.today
+    date.find_today
     e = Enigma.new(my_message, key, date.today)
 
     assert_instance_of Enigma, e
@@ -21,7 +21,7 @@ class EnigmaTest < Minitest::Test
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    date.today
+    date.find_today
     e = Enigma.new(my_message, key, date.today)
 
     assert_equal "this is so secret ..end..", output = e.encrypt(my_message)
@@ -31,7 +31,7 @@ class EnigmaTest < Minitest::Test
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    date.today
+    date.find_today
     e = Enigma.new(my_message, key, date.today)
 
     assert_equal "56710", key
@@ -41,9 +41,9 @@ class EnigmaTest < Minitest::Test
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    date.today
-    e = Enigma.new(my_message, key, date.today)
-    binding.pry
-    assert_equal 63, 72, 73, 14, e.find_key
+    today = date.find_today
+    e = Enigma.new(my_message, key, today)
+    # binding.pry
+    assert_equal [63, 72, 73, 14], e.find_key
   end
 end
