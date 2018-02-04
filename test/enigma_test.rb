@@ -97,7 +97,7 @@ class EnigmaTest < Minitest::Test
    today = date.find_today
    e = Enigma.new(my_message, key, today)
    e.split_message(my_message)
-
-   assert_equal ([["m","a","t","t"],["a","l","e","x"]]), e.split_message(my_message)
+   
+   assert_equal (["matt","alex"]), e.split_message(my_message)
  end
 end

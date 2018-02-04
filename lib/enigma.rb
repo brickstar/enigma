@@ -45,6 +45,6 @@ class Enigma
   end
 
   def split_message(my_message)
-    message.chars.each_slice(4).to_a
+    message.chars.each_slice(4).map(&:join)
   end
 end
