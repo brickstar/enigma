@@ -13,14 +13,13 @@ class Enigma
   end
 
   def encrypt(message)
-    message = message.chars
-
-    first_letter = cipher(63)[message[0]]
-    second_letter = cipher(72)[message[1]]
-    third_letter = cipher(73)[message[2]]
-    fourth_letter = cipher(14)[message[3]]
-
-    @message = first_letter + second_letter + third_letter + fourth_letter
+    message = message.map do |array|
+    result = []
+    result << cipher(63)[array[0]]
+    result << cipher(72)[array[1]]
+    result << cipher(73)[array[2]]
+    result << cipher(14)[array[3]]
+    end
   end
 
   def cipher(rotation)
