@@ -54,11 +54,11 @@ class EnigmaTest < Minitest::Test
     today = date.find_today
     e = Enigma.new(my_message, key, today)
     cipher = e.cipher(2)
-
+# binding.pry
     assert_instance_of Hash, cipher
     assert_equal "r", cipher["p"]
     assert_equal "s", cipher["q"]
-    assert_equal "b", cipher["z"]
+    assert_equal "!", cipher["z"]
     assert_equal "g", cipher["e"]
     assert_equal "e", cipher["c"]
  end
@@ -70,12 +70,12 @@ class EnigmaTest < Minitest::Test
     today = date.find_today
     e = Enigma.new(my_message, key, today)
     cipher = e.cipher(63)
-
-    assert_equal "e", cipher["t"]
-    assert_equal "v", cipher["k"]
-    assert_equal "g", cipher["v"]
-    assert_equal "k", cipher["z"]
-    assert_equal "c", cipher["r"]
+# binding.pry
+    assert_equal "X", cipher["t"]
+    assert_equal "O", cipher["k"]
+    assert_equal "Z", cipher["v"]
+    assert_equal "^", cipher["z"]
+    assert_equal "V", cipher["r"]
  end
 
  # def test_encrypt_can_take_4_rotating_letters
@@ -120,7 +120,19 @@ class EnigmaTest < Minitest::Test
     e = Enigma.new(my_message, key, today)
     message = e.split_message(my_message)
     new_message = e.encrypt(message)
-    binding.pry
-    assert_equal
+    # binding.pry
+    assert_equal "XUW&_Va.W\\i&IP`sXh", new_message
+  end
+
+  def test_encrypt_can_handle_caps_and_symbols
+    key = "56710"
+    my_message = "ThIs iS so AwEsoME!!?:)"
+    date = Date.new
+    today = date.find_today
+    e = Enigma.new(my_message, key, today)
+    message = e.split_message(my_message)
+    new_message = e.encrypt(message)
+# binding.pry
+    assert_equal "8U7&_VA.W\\iO[2a\"12j/#'r", new_message
   end
 end

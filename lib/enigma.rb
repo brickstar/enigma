@@ -20,10 +20,11 @@ class Enigma
     result << cipher(73)[array[2]]
     result << cipher(14)[array[3]]
     end
-  end
+    message.join
+   end
 
   def cipher(rotation)
-    characters = ('a'..'z').to_a
+    characters = (' '..'z').to_a
     rotated_characters = characters.rotate(rotation)
     new_hash = Hash[characters.zip(rotated_characters)]
   end
