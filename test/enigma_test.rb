@@ -79,5 +79,12 @@ class EnigmaTest < Minitest::Test
  end
 
  def test_encrypt_can_take_4_rotating_letters
- end 
+   key = "56710"
+   my_message = "matt"
+   date = Date.new
+   today = date.find_today
+   e = Enigma.new(my_message, key, today)
+   e.encrypt(my_message)
+   binding.pry
+ end
 end

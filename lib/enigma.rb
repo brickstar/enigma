@@ -1,7 +1,8 @@
 require 'pry'
 
 class Enigma
-  attr_reader :key_array
+  attr_reader :key_array,
+              :message
 
   def initialize(message, key = "56710", date_today)
     @message    = message
@@ -13,6 +14,13 @@ class Enigma
 
   def encrypt(message)
     @message
+    characters = message.chars
+    first_letter = cipher(63)characters[0]
+    second_letter = cipher(72)characters[1]
+    third_letter = cipher(73)characters[2]
+    fourth_letter = cipher(14)characters[3]
+
+    @message = first_letter + second_letter + third_letter + fourth_letter
     #A turn to turn 63
     #B turn it's 72
     #c turn it's 73
