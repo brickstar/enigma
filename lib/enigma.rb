@@ -22,7 +22,7 @@ class Enigma
   def cipher(rotation)
     characters = ('a'..'z').to_a
     rotated_characters = characters.rotate(rotation)
-    Hash[characters.zip(rotated_characters)]
+    new_hash = Hash[characters.zip(rotated_characters)]
   end
 
   def find_key

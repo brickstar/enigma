@@ -53,33 +53,13 @@ class EnigmaTest < Minitest::Test
     date = Date.new
     today = date.find_today
     e = Enigma.new(my_message, key, today)
-    e.cipher(2)
+    cipher = e.cipher(2)
 
-    assert_equal {"a" => "c",
-                  "b" => "d",
-                  "c" => "e",
-                  "d" => "f",
-                  "e" => "g",
-                  "f" => "h",
-                  "g" => "i",
-                  "h" => "j",
-                  "i" => "k",
-                  "j" => "l",
-                  "k" => "m",
-                  "l" => "n",
-                  "m" => "o",
-                  "n" => "p",
-                  "o" => "q",
-                  "p" => "r",
-                  "q" => "s",
-                  "r" => "t",
-                  "s" => "u",
-                  "t" => "v",
-                  "u" => "w",
-                  "v" => "x",
-                  "w" => "y",
-                  "x" => "z",
-                  "y" => "a",
-                  "z" => "b"}, e.cipher(2)
-  end
+    assert_instance_of Hash, cipher
+    assert_equal "r", cipher["p"]
+    assert_equal "s", cipher["q"]
+    assert_equal "b", cipher["z"]
+    assert_equal "g", cipher["e"]
+    assert_equal "e", cipher["c"]
+ end
 end
