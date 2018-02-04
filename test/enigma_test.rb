@@ -80,7 +80,7 @@ class EnigmaTest < Minitest::Test
 
  def test_encrypt_can_take_4_rotating_letters
     key = "56710"
-    my_message = "matt"
+    my_message = "mattalex"
     date = Date.new
     today = date.find_today
     e = Enigma.new(my_message, key, today)
@@ -88,10 +88,6 @@ class EnigmaTest < Minitest::Test
     assert_equal "x", e.cipher(63)["m"]
     assert_equal "h", e.cipher(14)["t"]
     assert_equal "xuoh", e.encrypt(my_message)
- end
-
- def test_encrypt_can_take_8_letters
-
  end
 
  def test_split_message_can_split_into_groups_of_4
@@ -102,6 +98,6 @@ class EnigmaTest < Minitest::Test
    e = Enigma.new(my_message, key, today)
    e.split_message(my_message)
 
-   assert_equal (["a","l","e","x"]), e.split_message(my_message)
+   assert_equal ([["m","a","t","t"],["a","l","e","x"]]), e.split_message(my_message)
  end
 end
