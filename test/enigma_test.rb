@@ -17,15 +17,15 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, e
   end
 
-  def test_enigma_class_can_take_message
-    key = "56710"
-    my_message = "this is so secret ..end.."
-    date = Date.new
-    date.find_today
-    e = Enigma.new(my_message, key, date.today)
-
-    assert_equal "this is so secret ..end..", output = e.encrypt(my_message)
-  end
+  # def test_enigma_class_can_take_message
+  #   key = "56710"
+  #   my_message = "this is so secret ..end.."
+  #   date = Date.new
+  #   date.find_today
+  #   e = Enigma.new(my_message, key, date.today)
+  #
+  #   assert_equal "this is so secret ..end..", output = e.encrypt(my_message)
+  # end
 
   def test_enigma_can_take_key
     key = "56710"
@@ -79,12 +79,14 @@ class EnigmaTest < Minitest::Test
  end
 
  def test_encrypt_can_take_4_rotating_letters
-   key = "56710"
-   my_message = "matt"
-   date = Date.new
-   today = date.find_today
-   e = Enigma.new(my_message, key, today)
-   e.encrypt(my_message)
-   binding.pry
+    key = "56710"
+    my_message = "matt"
+    date = Date.new
+    today = date.find_today
+    e = Enigma.new(my_message, key, today)
+
+    assert_equal "x", e.cipher(63)["m"]
+    assert_equal "h", e.cipher(14)["t"]
+    assert_equal "xuoh", e.encrypt(my_message)
  end
 end
