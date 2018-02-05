@@ -2,6 +2,12 @@ require './lib/cipher_module.rb'
 class Decrypt
   include Cipher
 
+  def initialize(message, key = "56710", date)
+    @message = message
+    @key  = key
+    @date = date
+  end
+
   def decrypt(message)
     message = message.map do |array|
     result = []
@@ -12,5 +18,5 @@ class Decrypt
     end
     message.join
    end
-   
+
  end

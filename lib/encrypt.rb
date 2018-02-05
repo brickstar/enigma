@@ -3,7 +3,7 @@ require './lib/cipher_module.rb'
 
 class Encrypt
   include Cipher
-  
+
   attr_reader :message
 
   def initialize(message, key = "56710", date)

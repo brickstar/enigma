@@ -7,7 +7,7 @@ module Cipher
   end
 
   def split_message(my_message)
-    message = message.chars.each_slice(4)
+    message = my_message.chars.each_slice(4)
     message.map(&:join)
   end
 
