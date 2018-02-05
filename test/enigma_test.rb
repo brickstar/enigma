@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/enigma'
 require './lib/date'
-
+require './lib/encrypt'
 require 'pry'
 
 class EnigmaTest < Minitest::Test
@@ -11,50 +11,52 @@ class EnigmaTest < Minitest::Test
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    date.find_today
-    e = Enigma.new(my_message, key, date.today)
+    encrypt = Encrypt.new(key, date.find_today)
+    e = Enigma.new(my_message)
 
     assert_instance_of Enigma, e
   end
 
-  def test_enigma_class_can_take_message
+  def test_encrypt_class_can_take_message
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    date.find_today
-    e = Enigma.new(my_message, key, date.today)
+    encrypt = Encrypt.new(my_message, key, date.find_today)
+    e = Enigma.new(encrypt)
 
-    assert_equal "this is so secret ..end..", output = e.message
-  end 
+    assert_equal "this is so secret ..end..", output = encrypt.message
+  end
 
   def test_enigma_can_take_key
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    date.find_today
-    e = Enigma.new(my_message, key, date.today)
+    encrypt = Encrypt.new(my_message, key, date.find_today)
+    e = Enigma.new(encrypt)
 
     assert_equal "56710", key
   end
 
-  def test_enigma_can_create_key
-    key = "56710"
-    my_message = "this is so secret ..end.."
-    date = Date.new
-    today = date.find_today
-    e = Enigma.new(my_message, key, today)
-
-    assert_equal [63, 72, 73, 14], e.find_key
-  end
+  # def test_enigma_can_create_key
+  #   skip
+  #   key = "56710"
+  #   my_message = "this is so secret ..end.."
+  #   date = Date.new
+  #   today = date.find_today
+  #   e = Enigma.new(my_message, key, today)
+  #
+  #   assert_equal [63, 72, 73, 14], e.find_key
+  # end
 
   def test_cipher_rotation_is_correct
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    today = date.find_today
-    e = Enigma.new(my_message, key, today)
-    cipher = e.cipher(2)
-# binding.pry
+    encrypt = Encrypt.new(my_message, key, date.find_today)
+    cipher = encrypt.cipher(2)
+    e = Enigma.new(encrypt)
+
+
     assert_instance_of Hash, cipher
     assert_equal "r", cipher["p"]
     assert_equal "s", cipher["q"]
@@ -64,18 +66,18 @@ class EnigmaTest < Minitest::Test
  end
 
  def test_encrypt_a_single_letter
-    key = "56710"
-    my_message = "t"
-    date = Date.new
-    today = date.find_today
-    e = Enigma.new(my_message, key, today)
-    cipher = e.cipher(63)
-# binding.pry
-    assert_equal "X", cipher["t"]
-    assert_equal "O", cipher["k"]
-    assert_equal "Z", cipher["v"]
-    assert_equal "^", cipher["z"]
-    assert_equal "V", cipher["r"]
+   key = "56710"
+   my_message = "t"
+   date = Date.new
+   encrypt = Encrypt.new(my_message, key, date.find_today)
+   cipher = encrypt.cipher(63)
+   e = Enigma.new(encrypt)
+
+   assert_equal "X", cipher["t"]
+   assert_equal "O", cipher["k"]
+   assert_equal "Z", cipher["v"]
+   assert_equal "^", cipher["z"]
+   assert_equal "V", cipher["r"]
  end
 
  def test_encrypt_can_take_4_rotating_letters
@@ -84,14 +86,16 @@ class EnigmaTest < Minitest::Test
     date = Date.new
     today = date.find_today
     e = Enigma.new(my_message, key, today)
-    split_message = e.split_message(my_message)
+    message = e.split_message(my_message)
+    new_message = Encrypt.new(message)
 
     assert_equal "Q", e.cipher(63)["m"]
     assert_equal "'", e.cipher(14)["t"]
-    assert_equal "QNb'EYS+", e.encrypt(split_message)
+    assert_equal "QNb'EYS+", e(new_message)
  end
 
  def test_split_message_can_split_into_groups_of_4
+   skip
    key = "56710"
    my_message = "mattalex"
    date = Date.new
@@ -103,6 +107,7 @@ class EnigmaTest < Minitest::Test
  end
 
   def test_edge_case_split_on_string_not_evenly_divisible_by_4
+    skip
     key = "56710"
     my_message = "this is so secret "
     date = Date.new
@@ -114,30 +119,33 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt_can_iterate_and_handle_more_than_4
+    skip
     key = "56710"
     my_message = "this is so secret "
     date = Date.new
     today = date.find_today
     e = Enigma.new(my_message, key, today)
     message = e.split_message(my_message)
-    new_message = e.encrypt(message)
+    new_message = Encrypt.new(message)
 
     assert_equal "XUW&_Va.W\\i&IP`sXh", new_message
   end
 
   def test_encrypt_can_handle_caps_and_symbols
+    skip
     key = "56710"
     my_message = "ThIs iS so AwEsoME!!?:)"
     date = Date.new
     today = date.find_today
-    e = Enigma.new(my_message, key, today)
     message = e.split_message(my_message)
-    new_message = e.encrypt(message)
+    encrypt = Encrypt.new(message, key, today)
+    new_message = Enigma.new(encrypt)
 
     assert_equal "8U7&_VA.W\\iO[2a\"12j/#'r", new_message
   end
 
   def test_decrypt
+    skip
     key = "56710"
     my_message = "8U7&_VA.W\\iO[2a\"12j/#'r"
     date = Date.new
