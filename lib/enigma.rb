@@ -41,7 +41,7 @@ class Enigma
   end
 
   def find_key
-    random_a = @key[0..1].to_i
+    random_a = @key[0..1].to_i      #split into 3
     random_b = @key[1..2].to_i
     random_c = @key[2..3].to_i
     random_d = @key[3..4].to_i
@@ -56,6 +56,6 @@ class Enigma
   end
 
   def split_message(my_message)
-    message.chars.each_slice(4).map(&:join)
+    message.chars.each_slice(4).map(&:join)#too dense
   end
 end
