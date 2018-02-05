@@ -2,7 +2,7 @@ require './lib/cipher_module.rb'
 class Decrypt
   include Cipher
 
-  def initialize(message, key = "56710", date)
+  def initialize(message, key, date)
     @message = message
     @key  = key
     @date = date

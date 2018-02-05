@@ -9,7 +9,8 @@ require 'pry'
 class EnigmaTest < Minitest::Test
 
   def test_enigma_class_exists
-    key = "56710"
+    key_instance = KeyGenerator.new
+    key = key_instance.key
     my_message = "this is so secret ..end.."
     date = Date.new
     encrypt = Encrypt.new(key, date.find_today)
@@ -19,7 +20,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt_class_can_take_message
-    key = "56710"
+    key =
     my_message = "this is so secret ..end.."
     date = Date.new
     encrypt = Encrypt.new(my_message, key, date.find_today)
@@ -29,7 +30,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_enigma_can_take_key
-    key = "56710"
+    key =
     my_message = "this is so secret ..end.."
     date = Date.new
     encrypt = Encrypt.new(my_message, key, date.find_today)
@@ -50,7 +51,7 @@ class EnigmaTest < Minitest::Test
   # end
 
   def test_cipher_rotation_is_correct
-    key = "56710"
+    key =
     my_message = "this is so secret ..end.."
     date = Date.new
     encrypt = Encrypt.new(my_message, key, date.find_today)
@@ -67,7 +68,7 @@ class EnigmaTest < Minitest::Test
  end
 
  def test_encrypt_a_single_letter
-   key = "56710"
+   key =
    my_message = "t"
    date = Date.new
    encrypt = Encrypt.new(my_message, key, date.find_today)
@@ -82,7 +83,7 @@ class EnigmaTest < Minitest::Test
  end
 
  def test_encrypt_can_take_4_rotating_letters
-   key = "56710"
+   key =
    my_message = "mattalex"
    date = Date.new
    encrypt_instance = Encrypt.new(my_message, key, date.find_today)
@@ -95,7 +96,7 @@ class EnigmaTest < Minitest::Test
  end
 
  def test_split_message_can_split_into_groups_of_4
-   key = "56710"
+   key =
    my_message = "mattalex"
    date = Date.new
    encrypt_instance = Encrypt.new(my_message, key, date.find_today)
@@ -105,7 +106,7 @@ class EnigmaTest < Minitest::Test
  end
 
   def test_edge_case_split_on_string_not_evenly_divisible_by_4
-    key = "56710"
+    key =
     my_message = "this is so secret "
     date = Date.new
     encrypt_instance = Encrypt.new(my_message, key, date.find_today)
@@ -115,7 +116,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt_can_iterate_and_handle_more_than_4
-    key = "56710"
+    key =
     my_message = "this is so secret "
     date = Date.new
     encrypt_instance = Encrypt.new(my_message, key, date.find_today)
@@ -126,7 +127,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encrypt_can_handle_caps_and_symbols
-    key = "56710"
+    key =
     my_message = "ThIs iS so AwEsoME!!?:)"
     date = Date.new
     encrypt_instance = Encrypt.new(my_message, key, date.find_today)
@@ -137,7 +138,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_decrypt
-    key = "56710"
+    key =
     my_message = "8U7&_VA.W\\iO[2a\"12j/#'r"
     date = Date.new
     decrypt_instance = Decrypt.new(my_message, key, date.find_today)
