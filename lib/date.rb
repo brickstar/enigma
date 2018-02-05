@@ -11,5 +11,5 @@ class Date
     @today = today_squared.to_s[-4..-1]
     @today
   end
-  # binding.pry
+
 end
