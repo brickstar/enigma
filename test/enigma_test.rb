@@ -135,4 +135,16 @@ class EnigmaTest < Minitest::Test
 # binding.pry
     assert_equal "8U7&_VA.W\\iO[2a\"12j/#'r", new_message
   end
+
+  def test_decrypt
+    key = "56710"
+    my_message = "8U7&_VA.W\\iO[2a\"12j/#'r"
+    date = Date.new
+    today = date.find_today
+    e = Enigma.new(my_message, key, today)
+    message = e.split_message(my_message)
+    new_message = e.decrypt(message)
+
+    assert_equal "ThIs iS so AwEsoME!!?:)", new_message
+  end
 end
