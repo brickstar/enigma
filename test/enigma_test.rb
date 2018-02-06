@@ -10,7 +10,7 @@ class EnigmaTest < Minitest::Test
 
   def test_enigma_class_exists
     key_instance = KeyGenerator.new
-    key = key_instance.key
+    key = key_instance.offset_calculator
     my_message = "this is so secret ..end.."
     date = Date.new
     encrypt = Encrypt.new(key, date.find_today)

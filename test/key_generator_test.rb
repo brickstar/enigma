@@ -1,22 +1,12 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/enigma'
-require './lib/date'
-require './lib/encrypt'
-require './lib/decrypt'
+require './lib/key_generator'
 require 'pry'
 
 class KeyGeneratorTest < Minitest::Test
 
-def test_enigma_can_create_key
-  skip
-  key = "56710"
-  my_message = "this is so secret ..end.."
-  date = Date.new
-  today = date.find_today
-  e = Enigma.new(my_message, key, today)
-
-  assert_equal [63, 72, 73, 14], e.find_key
-end
-
+  def test_key_generator_is_instantiated
+    key = KeyGenerator.new
+    assert_instance_of KeyGenerator, key
+  end
 end
