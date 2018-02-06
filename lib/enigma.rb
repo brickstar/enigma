@@ -7,10 +7,14 @@ class Enigma
   include Cipher
   attr_reader :message
 
-  def initialize(message, key = "56710", date = "7524")
+  def initialize(message, key = "56710", date = 7524)
     @message = message
     @key     = key
     @date    = date
+    @cipher_a = date[0]
+    @cipher_b = date[1]
+    @cipher_c = date[2]
+    @cipher_d = date[3]
   end
 
   def encrypt(message)
@@ -24,14 +28,38 @@ class Enigma
     message.join
   end
 
-  def decrypt(message = @message)
+  def decrypt(message)
     message = message.map do |array|
     result = []
-    result << cipher(19)[@message[-4]]
-    result << cipher(18)[@message[-3]]
-    result << cipher(77)[@message[-2]]
-    result << cipher(28)[@message[-1]]
+    result << cipher(@cipher_a)[array[-4]]
+    result << cipher(@cipher_b)[array[-3]]
+    result << cipher(@cipher_c)[array[-2]]
+    result << cipher(@cipher_d)[array[-1]]
     end
     message.join
+  end
+
+
+  def crack_key
+    cipher_key = []
+    while cipher(@cipher_a)[@message[-4]] != "n"
+      @cipher_a += 1
+    end
+    cipher_key << @cipher_a
+
+    while cipher(@cipher_b)[@message[-3]] != "d"
+      @cipher_b += 1
+    end
+    cipher_key << @cipher_b
+
+    while cipher(@cipher_c)[@message[-2]] != "."
+      @cipher_c += 1
+    end
+    cipher_key << @cipher_c
+
+    while cipher(@cipher_d)[@message[-1]] != "."
+      @cipher_d += 1
+    end
+    cipher_key << @cipher_d
    end
 end

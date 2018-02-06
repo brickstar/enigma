@@ -100,4 +100,26 @@ class EnigmaTest < Minitest::Test
 
     assert_equal (["this", " is ", "so s", "ecre", "t "]), split_message
   end
+
+  def test_crack_key
+    my_message = "XUW&_Va.W\i&IP`sXhw<I[R<m"
+    date = Date.new
+    e = Enigma.new(my_message, date.find_today)
+    cracked_key = e.crack_key
+    split_message = e.split_message(my_message)
+binding.pry
+    assert_equal "this is so secret ..end..", e.decrypt(split_message)
+  end
+  # def test_decrypt
+  #   key = "56710"
+  #   my_message = "8U7&_VA.W\\iO[2a\"12j/#'r"
+  #   date = Date.new
+  #   e = Enigma.new(my_message, key, date.find_today)
+  #
+  #   cracked_key = e.crack_key
+  #   split_message = e.split_message(my_message)
+  #   decrypted_message = e.decrypt(split_message)
+  #
+  #   assert_equal "ThIs iS so AwEsoME!!?:)", decrypted_message
+  # end
 end
