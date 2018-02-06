@@ -36,13 +36,13 @@ class EnigmaTest < Minitest::Test
  end
 
  def test_split_message_can_split_into_groups_of_4
-   key =
-   my_message = "mattalex"
-   date = Date.new
-   encrypt_instance = Encrypt.new(my_message, key, date.find_today)
-   split_message = encrypt_instance.split_message(my_message)
+    key =
+    my_message = "mattalex"
+    date = Date.new
+    encrypt_instance = Encrypt.new(my_message, key, date.find_today)
+    split_message = encrypt_instance.split_message(my_message)
 
-   assert_equal (["matt","alex"]), split_message
+    assert_equal (["matt","alex"]), split_message
  end
 
   def test_edge_case_split_on_string_not_evenly_divisible_by_4
@@ -54,6 +54,4 @@ class EnigmaTest < Minitest::Test
 
     assert_equal (["this", " is ", "so s", "ecre", "t "]), split_message
   end
-
-
 end
