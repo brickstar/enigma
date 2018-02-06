@@ -19,4 +19,6 @@ class Decrypt
     message.join
    end
 
+#subtract the date
+#we will just have the date
  end

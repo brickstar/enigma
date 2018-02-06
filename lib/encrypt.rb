@@ -22,4 +22,5 @@ class Encrypt
     end
     message.join
   end
+  
 end
