@@ -14,4 +14,16 @@ class KeyGenerator
     key_array << key[3..4].to_i
     key_array
   end
+
+  def offset_calculator
+    calculator = []
+    date = Date.new
+    date_today = date.find_today
+    calculator << key.find_key[0] + date_today[0].to_i
+    calculator << key.find_key[1] + date_today[1].to_i
+    calculator << key.find_key[2] + date_today[2].to_i
+    calculator << key.find_key[3] + date_today[3].to_i
+    calculator
+  end
+
 end

@@ -24,9 +24,9 @@ class EnigmaTest < Minitest::Test
     my_message = "this is so secret ..end.."
     date = Date.new
     encrypt = Encrypt.new(my_message, key, date.find_today)
-    cipher = encrypt.cipher(2)
+    cipher = encrypt.cipher(19)
     e = Enigma.new(encrypt)
-
+binding.pry
     assert_instance_of Hash, cipher
     assert_equal "r", cipher["p"]
     assert_equal "s", cipher["q"]
