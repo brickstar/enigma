@@ -18,19 +18,20 @@ class Crack
       @cipher_a += 1
     end
     cipher_key << @cipher_a
-    cipher_key
-  #     cipher_key << cipher(@cipher_a)
-  #   until @message[-3] == "d"
-  #     cipher(@cipher_b += 1)
-  #   end
-  #     cipher_key << cipher(@cipher_b)
-  #   until @message[-2] == "."
-  #     cipher(@cipher_c +=1)
-  #   end
-  #     cipher_key << cipher(@cipher_c)
-  #    until @message[-1] == "."
-  #      cipher(@cipher_d +=1)
-  #    end
-  #     cipher_key << cipher(@cipher_d)
+
+    while cipher(@cipher_b)[@message[-3]] != "d"
+      @cipher_b += 1
+    end
+    cipher_key << @cipher_b
+
+    while cipher(@cipher_c)[@message[-2]] != "."
+      @cipher_c += 1
+    end
+    cipher_key << @cipher_c
+
+    while cipher(@cipher_d)[@message[-1]] != "."
+      @cipher_d += 1
+    end
+    cipher_key << @cipher_d
   end
 end

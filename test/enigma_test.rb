@@ -9,24 +9,70 @@ require 'pry'
 class EnigmaTest < Minitest::Test
 
   def test_enigma_class_exists
-    key_instance = KeyGenerator.new
-    key = key_instance.offset_calculator
+    key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    encrypt = Encrypt.new(key, date.find_today)
-    e = Enigma.new(my_message)
+    e = Enigma.new(my_message, key, date.find_today)
 
     assert_instance_of Enigma, e
+  end
+
+  def test_encrypt_a_single_letter
+    key = "56710"
+    my_message = "t"
+    date = Date.new
+    e = Enigma.new(my_message, key, date.find_today)
+    cipher = e.cipher(63)
+
+    assert_equal "X", cipher["t"]
+    assert_equal "O", cipher["k"]
+    assert_equal "Z", cipher["v"]
+    assert_equal "^", cipher["z"]
+    assert_equal "V", cipher["r"]
+  end
+
+  def test_encrypt_can_take_4_rotating_letters
+    key = "56710"
+    my_message = "mattalex"
+    date = Date.new
+    e = Enigma.new(my_message, key, date.find_today)
+    split_message = e.split_message(my_message)
+    encrypted_message = e.encrypt(split_message)
+
+    assert_equal "Q", encrypted_message[0]
+    assert_equal "'", encrypted_message[3]
+    assert_equal "QNb'EYS+", encrypted_message
+  end
+
+  def test_encrypt_can_iterate_and_handle_more_than_4
+    key = "56710"
+    my_message = "this is so secret "
+    date = Date.new
+    e = Enigma.new(my_message, key, date.find_today)
+    split_message = e.split_message(my_message)
+    encrypted_message = e.encrypt(split_message)
+
+    assert_equal "XUW&_Va.W\\i&IP`sXh", encrypted_message
+  end
+
+  def test_encrypt_can_handle_caps_and_symbols
+    key = "56710"
+    my_message = "ThIs iS so AwEsoME!!?:)"
+    date = Date.new
+    e = Enigma.new(my_message, key, date.find_today)
+    split_message = e.split_message(my_message)
+    encrypted_message = e.encrypt(split_message)
+
+    assert_equal "8U7&_VA.W\\iO[2a\"12j/#'r", encrypted_message
   end
 
   def test_cipher_rotation_is_correct
     key = "56710"
     my_message = "this is so secret ..end.."
     date = Date.new
-    encrypt = Encrypt.new(my_message, key, date.find_today)
-    cipher = encrypt.cipher(19)
-    e = Enigma.new(encrypt)
-binding.pry
+    e = Enigma.new(my_message, key, date.find_today)
+    cipher = e.cipher(2)
+
     assert_instance_of Hash, cipher
     assert_equal "r", cipher["p"]
     assert_equal "s", cipher["q"]
@@ -36,21 +82,21 @@ binding.pry
  end
 
  def test_split_message_can_split_into_groups_of_4
-    key =
+    key = "56710"
     my_message = "mattalex"
     date = Date.new
-    encrypt_instance = Encrypt.new(my_message, key, date.find_today)
-    split_message = encrypt_instance.split_message(my_message)
+    e = Enigma.new(my_message, key, date.find_today)
+    split_message = e.split_message(my_message)
 
     assert_equal (["matt","alex"]), split_message
  end
 
   def test_edge_case_split_on_string_not_evenly_divisible_by_4
-    key =
+    key = "56710"
     my_message = "this is so secret "
     date = Date.new
-    encrypt_instance = Encrypt.new(my_message, key, date.find_today)
-    split_message = encrypt_instance.split_message(my_message)
+    e = Enigma.new(my_message, key, date.find_today)
+    split_message = e.split_message(my_message)
 
     assert_equal (["this", " is ", "so s", "ecre", "t "]), split_message
   end
