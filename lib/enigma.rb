@@ -31,13 +31,42 @@ class Enigma
   end
 
   def decrypt(message)
+    if message.join.length % 4 == 0
+      message = message.map do |array|
+      result = []
+      result << cipher(@cipher_a)[array[-4]]
+      result << cipher(@cipher_b)[array[-3]]
+      result << cipher(@cipher_c)[array[-2]]
+      result << cipher(@cipher_d)[array[-1]]
+    end
+
+    elsif message.join.length % 4 == 1
+      message = message.map do |array|
+      result = []
+      result << cipher(@cipher_d)[array[0]]
+      result << cipher(@cipher_a)[array[1]]
+      result << cipher(@cipher_b)[array[2]]
+      result << cipher(@cipher_c)[array[3]]
+    end
+
+    elsif  message.join.length % 4 == 2
+      message = message.map do |array|
+      result = []
+      result << cipher(@cipher_c)[array[0]]
+      result << cipher(@cipher_d)[array[1]]
+      result << cipher(@cipher_a)[array[2]]
+      result << cipher(@cipher_b)[array[3]]
+    end
+
+    else
     message = message.map do |array|
     result = []
-    result << cipher(@cipher_a)[array[-4]]
-    result << cipher(@cipher_b)[array[-3]]
-    result << cipher(@cipher_c)[array[-2]]
-    result << cipher(@cipher_d)[array[-1]]
+    result << cipher(@cipher_b)[array[0]]
+    result << cipher(@cipher_c)[array[1]]
+    result << cipher(@cipher_d)[array[2]]
+    result << cipher(@cipher_a)[array[3]]
     end
+   end
     message.join
   end
 
@@ -58,10 +87,9 @@ class Enigma
     while cipher(@cipher_d)[@message[-1]] != "."
       @cipher_d += 1
     end
-
    end
 end
-# 
+#Just add a key initalize with a random key
 # key = KeyGenerator.new
 # key.random_key
 # calculator = key.offset_calculator

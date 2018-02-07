@@ -141,15 +141,24 @@ class EnigmaTest < Minitest::Test
     assert_equal "his is so secret ..end..", e.decrypt(split_message)
   end
 
-  # def test_decrypt_can_handle_odd_numbers
-  #   key = "56710"
-  #   my_message = "XUW&_Va.W\i&IP`sXhw<I[R<m"
-  #   date = Date.new
-  #   e = Enigma.new(my_message, key, date.find_today)
-  #   e.crack_key
-  #   split_message = e.split_message(my_message)
-  #   decrypted_message = e.decrypt(split_message)
-  #
-  #   assert_equal "this is so secret ..end..", decrypted_message
-  # end
+  def test_decrypt_can_handle_odd_numbers
+    my_message = "XUW&_Va.W\\i&IP`sXhw<I[R<m"
+    date = Date.new
+    e = Enigma.new(my_message, date.find_today)
+    e.crack_key
+    split_message = e.split_message(my_message)
+
+    assert_equal "this is so secret ..end..", e.decrypt(split_message)
+  end
+
+  def test_decrypt_can_handle_caps_and_numbers
+    key = "18245"
+    my_message = "-hQORh2\"_DVoXRdsVijM#h7.[N\\'`hw<I[R<m"
+    date = Date.new
+    e = Enigma.new(my_message, date.find_today)
+    e.crack_key
+    split_message = e.split_message(my_message)
+
+    # assert_equal  e.decrypt(split_message)
+  end
 end

@@ -10,4 +10,5 @@ module Cipher
     message = my_message.chars.each_slice(4)
     message.map(&:join)
   end
+
 end
