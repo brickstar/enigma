@@ -2,8 +2,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/enigma'
 require './lib/date'
-require './lib/encrypt'
-require './lib/decrypt'
 require 'pry'
 
 class EnigmaTest < Minitest::Test
@@ -38,7 +36,7 @@ class EnigmaTest < Minitest::Test
     e = Enigma.new(my_message, key, date.find_today)
     split_message = e.split_message(my_message)
     encrypted_message = e.encrypt(split_message)
-
+binding.pry
     assert_equal "Q", encrypted_message[0]
     assert_equal "'", encrypted_message[3]
     assert_equal "QNb'EYS+", encrypted_message

@@ -1,5 +1,4 @@
 require 'pry'
-require './lib/decrypt.rb'
 require './lib/cipher_module.rb'
 require './lib/key_generator.rb'
 
@@ -9,7 +8,7 @@ class Enigma
               :key,
               :date
 
-  def initialize(message, key, date = 7524)
+  def initialize(message, key = "56710", date = 7524)
     @message = message
     @key     = key
     @date    = date
@@ -22,10 +21,10 @@ class Enigma
   def encrypt(message = @message)
     message = message.map do |array|
     result = []
-    result << cipher(@key[0])[array[0]]
-    result << cipher(@key[1])[array[1]]
-    result << cipher(@key[2])[array[2]]
-    result << cipher(@key[3])[array[3]]
+    result << cipher(@key[0..1])[array[0]]
+    result << cipher(@key[1..2])[array[1]]
+    result << cipher(@key[2..3])[array[2]]
+    result << cipher(@key[3..4])[array[3]]
     end
     message.join
   end
