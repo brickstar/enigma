@@ -9,9 +9,9 @@ class Enigma
               :date
 
   def initialize(message, key = "56710", date = 7524)
-    @message = message
-    @key     = key
-    @date    = date
+    @message  = message
+    @key      = key
+    @date     = date
     @cipher_a = date[0]
     @cipher_b = date[1]
     @cipher_c = date[2]

@@ -103,15 +103,6 @@ class EnigmaTest < Minitest::Test
     assert_equal "his is so secret ..end..", e.decrypt(split_message)
   end
 
-#   def test_decrypt_can_handle_modulo_2
-#     my_message = "mQ\\rmu"
-#     date = Date.new
-#     e = Enigma.new(my_message, date.find_today)
-#     split_message = e.split_message(my_message)
-# # binding.pry
-#     assert_equal ".end..", e.decrypt(split_message)
-#   end
-
   def test_decrypt_can_handle_odd_numbers
     my_message = "XUW&_Va.W\\i&IP`sXhw<I[R<m"
     date = Date.new
