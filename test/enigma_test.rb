@@ -153,12 +153,12 @@ class EnigmaTest < Minitest::Test
 
   def test_decrypt_can_handle_caps_and_numbers
     key = "18245"
-    my_message = "-hQORh2\"_DVoXRdsVijM#h7.[N\\'`hw<I[R<m"
+    my_message = %Q(-hQORh2"_DVoXRdsVijM#h7.[N\\'`hw<I[R<m)
     date = Date.new
     e = Enigma.new(my_message, date.find_today)
     e.crack_key
     split_message = e.split_message(my_message)
 
-    # assert_equal  e.decrypt(split_message)
+    assert_equal "I cAn Do Whatever!!?? I want! ..end..", e.decrypt(split_message)
   end
 end
