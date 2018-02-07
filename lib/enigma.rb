@@ -1,5 +1,4 @@
 require 'pry'
-require './lib/encrypt.rb'
 require './lib/decrypt.rb'
 require './lib/cipher_module.rb'
 require './lib/key_generator.rb'

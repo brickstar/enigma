@@ -1,4 +1,3 @@
-require './lib/encrypt.rb'
 require './lib/decrypt.rb'
 require './lib/cipher_module.rb'
 require './lib/key_generator.rb'
@@ -19,4 +18,4 @@ encrypted_text = File.open(ARGV[1], "w")
 encrypted_text.write(enigma.encrypt(split_message))
 encrypted_text.close
 
-p "Created #{ARGV[1]} with the key #{enigma.key} and date #{enigma.date}"
+puts "Created #{ARGV[1]} with the key #{enigma.key} and date #{enigma.date}"
