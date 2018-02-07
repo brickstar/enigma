@@ -6,9 +6,11 @@ require './lib/key_generator.rb'
 
 class Enigma
   include Cipher
-  attr_reader :message
+  attr_reader :message,
+              :key,
+              :date
 
-  def initialize(message, key = "56710", date = 7524)
+  def initialize(message, key, date = 7524)
     @message = message
     @key     = key
     @date    = date
@@ -21,10 +23,10 @@ class Enigma
   def encrypt(message = @message)
     message = message.map do |array|
     result = []
-    result << cipher(63)[array[0]]
-    result << cipher(72)[array[1]]
-    result << cipher(73)[array[2]]
-    result << cipher(14)[array[3]]
+    result << cipher(@key[0])[array[0]]
+    result << cipher(@key[1])[array[1]]
+    result << cipher(@key[2])[array[2]]
+    result << cipher(@key[3])[array[3]]
     end
     message.join
   end
@@ -88,13 +90,3 @@ class Enigma
     end
   end
 end
-#Just add a key initalize with a random key
-# key = KeyGenerator.new
-# key.random_key
-# calculator = key.offset_calculator
-# message = message.map do |array|
-# result = []
-# result << cipher(calculator[0..1])[array[0]]
-# result << cipher(calculator[1..2])[array[1]]
-# result << cipher(calculator[2..3])[array[2]]
-# result << cipher(calculator[3..4])[array[3]]
