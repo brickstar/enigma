@@ -1,4 +1,3 @@
-require './lib/decrypt.rb'
 require './lib/cipher_module.rb'
 require './lib/key_generator.rb'
 require './lib/enigma.rb'
