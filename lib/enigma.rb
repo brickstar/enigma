@@ -17,7 +17,7 @@ class Enigma
     @cipher_d = date[3]
   end
 
-  def encrypt(message)
+  def encrypt(message = @message)
     message = message.map do |array|
     result = []
     result << cipher(63)[array[0]]
@@ -41,25 +41,21 @@ class Enigma
 
 
   def crack_key
-    cipher_key = []
     while cipher(@cipher_a)[@message[-4]] != "n"
       @cipher_a += 1
     end
-    cipher_key << @cipher_a
 
     while cipher(@cipher_b)[@message[-3]] != "d"
       @cipher_b += 1
     end
-    cipher_key << @cipher_b
 
     while cipher(@cipher_c)[@message[-2]] != "."
       @cipher_c += 1
     end
-    cipher_key << @cipher_c
 
     while cipher(@cipher_d)[@message[-1]] != "."
       @cipher_d += 1
     end
-    cipher_key << @cipher_d
+
    end
 end
