@@ -2,6 +2,7 @@ require 'pry'
 require './lib/encrypt.rb'
 require './lib/decrypt.rb'
 require './lib/cipher_module.rb'
+require './lib/key_generator.rb'
 
 class Enigma
   include Cipher
@@ -18,6 +19,7 @@ class Enigma
   end
 
   def encrypt(message = @message)
+
     message = message.map do |array|
     result = []
     result << cipher(63)[array[0]]
@@ -59,3 +61,13 @@ class Enigma
 
    end
 end
+# 
+# key = KeyGenerator.new
+# key.random_key
+# calculator = key.offset_calculator
+# message = message.map do |array|
+# result = []
+# result << cipher(calculator[0..1])[array[0]]
+# result << cipher(calculator[1..2])[array[1]]
+# result << cipher(calculator[2..3])[array[2]]
+# result << cipher(calculator[3..4])[array[3]]
