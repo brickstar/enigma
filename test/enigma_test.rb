@@ -15,53 +15,15 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, e
   end
 
-  def test_encrypt_a_single_letter
-    key = "56710"
-    my_message = "t"
-    date = Date.new
-    e = Enigma.new(my_message, key, date.find_today)
-    cipher = e.cipher(63)
-
-    assert_equal "X", cipher["t"]
-    assert_equal "O", cipher["k"]
-    assert_equal "Z", cipher["v"]
-    assert_equal "^", cipher["z"]
-    assert_equal "V", cipher["r"]
-  end
-
-  def test_encrypt_can_take_4_rotating_letters
-    key = "56710"
-    my_message = "mattalex"
-    date = Date.new
-    e = Enigma.new(my_message, key, date.find_today)
-    split_message = e.split_message(my_message)
-    encrypted_message = e.encrypt(split_message)
-binding.pry
-    assert_equal "Q", encrypted_message[0]
-    assert_equal "'", encrypted_message[3]
-    assert_equal "QNb'EYS+", encrypted_message
-  end
-
-  def test_encrypt_can_iterate_and_handle_more_than_4
-    key = "56710"
-    my_message = "this is so secret "
-    date = Date.new
-    e = Enigma.new(my_message, key, date.find_today)
-    split_message = e.split_message(my_message)
-    encrypted_message = e.encrypt(split_message)
-
-    assert_equal "XUW&_Va.W\\i&IP`sXh", encrypted_message
-  end
-
   def test_encrypt_can_handle_caps_and_symbols
-    key = "56710"
+    key = [63,71,73,14]
     my_message = "ThIs iS so AwEsoME!!?:)"
     date = Date.new
     e = Enigma.new(my_message, key, date.find_today)
     split_message = e.split_message(my_message)
     encrypted_message = e.encrypt(split_message)
 
-    assert_equal "8U7&_VA.W\\iO[2a\"12j/#'r", encrypted_message
+    assert_equal "8T7&_UA.W[iO[1a\"11j/#&r", encrypted_message
   end
 
   def test_cipher_rotation_is_correct
