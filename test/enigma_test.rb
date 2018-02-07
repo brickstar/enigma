@@ -9,7 +9,7 @@ class EnigmaTest < Minitest::Test
   def test_enigma_class_exists
     key = "56710"
     my_message = "this is so secret ..end.."
-    date = Date.new
+    date = Date.new 
     e = Enigma.new(my_message, key, date.find_today)
 
     assert_instance_of Enigma, e
