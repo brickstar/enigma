@@ -1,3 +1,4 @@
+require './test/test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/key_generator'
@@ -10,5 +11,4 @@ class KeyGeneratorTest < Minitest::Test
 
     assert_instance_of KeyGenerator, key
   end
-
 end

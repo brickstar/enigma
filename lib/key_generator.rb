@@ -4,7 +4,6 @@ class KeyGenerator
 
   def random_key
     @key = rand(9999..100000).to_s
-
   end
 
   def find_key(key = @key)
