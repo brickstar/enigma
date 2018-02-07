@@ -19,7 +19,6 @@ class Enigma
   end
 
   def encrypt(message = @message)
-
     message = message.map do |array|
     result = []
     result << cipher(63)[array[0]]
@@ -59,12 +58,12 @@ class Enigma
     end
 
     else
-    message = message.map do |array|
-    result = []
-    result << cipher(@cipher_b)[array[0]]
-    result << cipher(@cipher_c)[array[1]]
-    result << cipher(@cipher_d)[array[2]]
-    result << cipher(@cipher_a)[array[3]]
+      message = message.map do |array|
+      result = []
+      result << cipher(@cipher_b)[array[0]]
+      result << cipher(@cipher_c)[array[1]]
+      result << cipher(@cipher_d)[array[2]]
+      result << cipher(@cipher_a)[array[3]]
     end
    end
     message.join
@@ -87,7 +86,7 @@ class Enigma
     while cipher(@cipher_d)[@message[-1]] != "."
       @cipher_d += 1
     end
-   end
+  end
 end
 #Just add a key initalize with a random key
 # key = KeyGenerator.new
