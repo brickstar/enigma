@@ -13,4 +13,5 @@ split_message = enigma.split_message(incoming_text)
 decrypted_text = File.open(ARGV[1], "w")
 decrypted_text.write(enigma.decrypt(split_message))
 decrypted_text.close
-puts "Created #{ARGV[1]} with the key #{enigma.key} and date #{enigma.date}"
+
+puts "Created #{ARGV[1]} with date offset #{enigma.date}"
